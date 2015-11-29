@@ -1,0 +1,29 @@
+#Encodervalues, #Drivevalues
+{
+	width:auto;
+	margin: 0 auto;
+}
+
+#Section_Encodervalues, #Section_Drivevalues
+{
+	border:1px solid gray;  
+	padding:8px;
+	
+}
+
+.Encoder_Left, .Encoder_Right, .Drive_Left, .Drive_Right
+{
+	width: 50%;	
+	float: left;
+	text-align: center;
+}
+
+
+
+
+#id_table_md49data{
+	border: 1px solid black
+}
+#id_table_md49encoders{
+	border: 1px solid black
+}
