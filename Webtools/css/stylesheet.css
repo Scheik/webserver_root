@@ -12,7 +12,7 @@ body
 	padding:8px
 }
 
-#Encodervalues, #Drivevalues
+#Encodervalues, #Drivevalues, ##Drivevalues_Grid
 {
 	width:auto;
 	margin: 0 auto;
@@ -25,19 +25,17 @@ body
 	
 }
 
-.Encoder_Left, .Encoder_Right, .Drive_Left, .Drive_Right
+.Encoder_Left, .Encoder_Right, .Drive_Left, .Drive_Right, .Drive_Left_Grid, .Drive_Right_Grid
 {
 	width: 50%;	
 	float: left;
 	text-align: center;
 }
 
-
-
-
 #id_table_md49data{
 	border: 1px solid black
 }
+
 #id_table_md49encoders{
 	border: 1px solid black
 }

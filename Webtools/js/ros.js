@@ -1,11 +1,78 @@
 window.onload = function()
 {
 
+// Current Right Chart
+// -------------------
+var dps_right_current = []; // dataPoints
+
+var chart_right_current = new CanvasJS.Chart("right_current",{
+  title :{
+    text: "Current Right"
+  },      
+  data: [{
+    type: "line",
+    dataPoints: dps_right_current 
+  }]
+});
+
+var xVal_right_current = 0;
+var yVal_right_current = 0; 
+var dataLength_right_current = 3000; // number of dataPoints visible at any point
+
+var updateChart_right_current = function (count_right_current) {
+  count_right_current = count_right_current || 1;
+  dps_right_current.push({
+    x: xVal_right_current,
+    y: yVal_right_current
+  });
+  xVal_right_current++;
+  if (dps_right_current.length > dataLength_right_current)
+  {
+    dps_right_current.shift();        
+  }
+  
+  chart_right_current.render();   
+};
+
+// Current Left Chart
+// -------------------
+var dps_left_current = []; // dataPoints
+
+var chart_left_current = new CanvasJS.Chart("left_current",{
+  title :{
+    text: "Current Left"
+  },      
+  data: [{
+    type: "line",
+    dataPoints: dps_left_current 
+  }]
+});
+
+var xVal_left_current = 0;
+var yVal_left_current = 0; 
+var dataLength_left_current = 3000; // number of dataPoints visible at any point
+
+var updateChart_left_current = function (count_left_current) {
+  count_left_current = count_left_current || 1;
+  dps_left_current.push({
+    x: xVal_left_current,
+    y: yVal_left_current
+  });
+  xVal_left_current++;
+  if (dps_left_current.length > dataLength_left_current)
+  {
+    dps_left_current.shift();        
+  }
+  
+  chart_left_current.render();   
+};
+
+// Set defaults for notify
+// -----------------------
 $.notify.defaults({gap:2,autoHideDelay: 5000})
 
 // Connecting to ROS
 // -----------------
-
 var ros = new ROSLIB.Ros({
   url : 'ws://robotik.ddns.net:9090'
 });
@@ -25,9 +92,8 @@ ros.on('close', function() {
   $.notify("Connection to websocket server closed.", "warn");
 });
 
-// Subscribing to a Topic
-// ----------------------
-
+// Subscribing to topic md49_data
+// ------------------------------
 var listener_md49data = new ROSLIB.Topic({
   ros : ros,
   name : '/md49_data',
@@ -41,12 +107,17 @@ listener_md49data.subscribe(function(message) {
   document.getElementById('Motor_l-0').innerHTML=message.speed_l;
   document.getElementById('Motor_r-0').innerHTML=message.speed_r;
   document.getElementById('Motor_l-1').innerHTML=message.current_l*10 + 'mA';
+  yVal_left_current=message.current_l*10;
+  updateChart_left_current();
   document.getElementById('Motor_r-1').innerHTML=message.current_r*10 + 'mA';
+  yVal_right_current=message.current_r*10;
+  updateChart_right_current();
   //document.getElementById('id_current_left').innerHTML=message.volts + ' V';
   //listener_md49data.unsubscribe();
 });
 
-
+// Subscribing to topic md49_encoders
+// ----------------------------------
 var listener_md49encoders = new ROSLIB.Topic({
   ros : ros,
   name : '/md49_encoders',
@@ -68,6 +139,8 @@ listener_md49encoders.subscribe(function(encoder_message) {
   document.getElementById('r_byte_4').innerHTML=encoder_message.encoderbyte4r;
   //listener_md49encoders.unsubscribe();
 });
+
+
 
 }
 
