@@ -12,7 +12,7 @@ body
 	padding:8px
 }
 
-#Encodervalues, #Drivevalues, ##Drivevalues_Grid
+#Encodervalues, #Drivevalues, ##Drivevalues_Charts
 {
 	width:auto;
 	margin: 0 auto;
@@ -25,7 +25,7 @@ body
 	
 }
 
-.Encoder_Left, .Encoder_Right, .Drive_Left, .Drive_Right, .Drive_Left_Grid, .Drive_Right_Grid
+.Encoder_Left, .Encoder_Right, .Drive_Left, .Drive_Right, .Drive_Left_Chart, .Drive_Right_Chart
 {
 	width: 50%;	
 	float: left;

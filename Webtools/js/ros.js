@@ -1,3 +1,21 @@
+function validate_left_current_chart(){
+  var remember = document.getElementById('Enable_left_current_chart');
+  if (remember.checked){
+      $.notify("Enabled left drive current realtimechart", "success");
+  }else{
+      $.notify("Disabled left drive current realtimechart", "warn");
+  }
+};
+
+function validate_right_current_chart(){
+  var remember = document.getElementById('Enable_right_current_chart');
+  if (remember.checked){
+      $.notify("Enabled right drive current realtimechart", "success");
+  }else{
+      $.notify("Disabled right drive current realtimechart", "warn");
+  }
+};
+
 window.onload = function()
 {
 
@@ -21,17 +39,20 @@ var dataLength_right_current = 3000; // number of dataPoints visible at any poin
 
 var updateChart_right_current = function (count_right_current) {
   count_right_current = count_right_current || 1;
-  dps_right_current.push({
+  var remember = document.getElementById('Enable_right_current_chart');
+  if (remember.checked){
+    dps_right_current.push({
     x: xVal_right_current,
     y: yVal_right_current
-  });
-  xVal_right_current++;
-  if (dps_right_current.length > dataLength_right_current)
-  {
-    dps_right_current.shift();        
-  }
-  
-  chart_right_current.render();   
+    });
+    xVal_right_current++;
+    if (dps_right_current.length > dataLength_right_current)
+    {
+      dps_right_current.shift();        
+    }
+    
+    chart_right_current.render(); 
+  }    
 };
 
 // Current Left Chart
@@ -54,17 +75,20 @@ var dataLength_left_current = 3000; // number of dataPoints visible at any point
 
 var updateChart_left_current = function (count_left_current) {
   count_left_current = count_left_current || 1;
-  dps_left_current.push({
-    x: xVal_left_current,
-    y: yVal_left_current
-  });
-  xVal_left_current++;
-  if (dps_left_current.length > dataLength_left_current)
-  {
-    dps_left_current.shift();        
-  }
-  
-  chart_left_current.render();   
+  var remember = document.getElementById('Enable_left_current_chart');
+  if (remember.checked){
+    dps_left_current.push({
+      x: xVal_left_current,
+      y: yVal_left_current
+    });
+    xVal_left_current++;
+    if (dps_left_current.length > dataLength_left_current)
+    {
+      dps_left_current.shift();        
+    }
+    
+    chart_left_current.render();
+  } 
 };
 
 // Set defaults for notify
@@ -139,8 +163,6 @@ listener_md49encoders.subscribe(function(encoder_message) {
   document.getElementById('r_byte_4').innerHTML=encoder_message.encoderbyte4r;
   //listener_md49encoders.unsubscribe();
 });
-
-
 
 }
 

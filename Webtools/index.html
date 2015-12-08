@@ -48,13 +48,13 @@
 
       <!-- TAB 1: START -->
       <div id="tabs-1">
-        <h1>Welcome to Webtools for my mobile robot</h1>
+        <h1>Welcome to the Webtools for my mobile robot</h1>
         <p></p>
       </div>
 
       <!-- TAB 2: BASE_CONTROLLER -->  
       <div id="tabs-2">
-        <!-- Anzeige Encoderdaten --> 
+        <!-- Anzeige Tables Encoderdaten --> 
         <section id = "Section_Encodervalues">
         <header><h2>Encoderdaten</h2></header>
         <div id = "Encodervalues">
@@ -113,7 +113,7 @@
 
       <p></p>
 
-        <!-- Anzeige Table Leistungswerte --> 
+        <!-- Anzeige Tables Leistungswerte --> 
         <section id = "Section_Drivevalues">
           <header><h2>Leistungsdaten</h2></header>
           <div id = "Drivevalues">
@@ -154,13 +154,18 @@
 
           <p></p>
 
-          <!-- Anzeige Grid Leistungswerte -->
-          <div id = "Drivevalues_Grid">  
-            <div class = "Drive_Left_Grid">
+          <!-- Anzeige Charts Leistungswerte -->
+          <div id = "Drivevalues_Charts">  
+            <div class = "Drive_Left_Chart">
+              <input id="Enable_left_current_chart" name="enable_left_current_chart" type="checkbox" onclick="validate_left_current_chart()" checked/>
               <div id="left_current" style="display:inline-block; border:1px solid black; width:450px; height:250px"></div>
+              <script type="text/javascript">
+                
+              </script>
             </div>
 
-            <div class = "Drive_Right_Grid">
+            <div class = "Drive_Right_Chart">
+              <input id="Enable_right_current_chart" name="enable_right_current_chart" type="checkbox" onclick="validate_right_current_chart()" checked/>
               <div id="right_current" style="display:inline-block; border:1px solid black; width:450px; height:250px"></div>
             </div>  
           </div>
