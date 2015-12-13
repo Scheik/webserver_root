@@ -26,7 +26,10 @@ var dps_right_current = []; // dataPoints
 var chart_right_current = new CanvasJS.Chart("right_current",{
   title :{
     text: "Current Right"
-  },      
+  },
+  axisY:{
+   maximum: 100,
+  },        
   data: [{
     type: "line",
     dataPoints: dps_right_current 
@@ -35,7 +38,7 @@ var chart_right_current = new CanvasJS.Chart("right_current",{
 
 var xVal_right_current = 0;
 var yVal_right_current = 0; 
-var dataLength_right_current = 3000; // number of dataPoints visible at any point
+var dataLength_right_current = 1500; // number of dataPoints visible at any point
 
 var updateChart_right_current = function (count_right_current) {
   count_right_current = count_right_current || 1;
@@ -62,6 +65,9 @@ var dps_left_current = []; // dataPoints
 var chart_left_current = new CanvasJS.Chart("left_current",{
   title :{
     text: "Current Left"
+  },
+  axisY:{
+   maximum: 100,
   },      
   data: [{
     type: "line",
@@ -71,7 +77,7 @@ var chart_left_current = new CanvasJS.Chart("left_current",{
 
 var xVal_left_current = 0;
 var yVal_left_current = 0; 
-var dataLength_left_current = 3000; // number of dataPoints visible at any point
+var dataLength_left_current = 1500; // number of dataPoints visible at any point
 
 var updateChart_left_current = function (count_left_current) {
   count_left_current = count_left_current || 1;
