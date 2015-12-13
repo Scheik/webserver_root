@@ -39,7 +39,7 @@
 			<article  style="background-color:#e5f2ff">
 				<h2>{{ post.title }}</h2>
 				<h3>Posted on {{ post.timestamp }} by {{ post.author }}</h3>
-				<p>{{ post.bodytext }}</p>
+				<p>{{ post.bodytext|safe }}</p>
 			</article>
 		{% endfor %}
 		</section>
