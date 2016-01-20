@@ -2,31 +2,32 @@
 <html ng-app>
 <head>
 
-	<meta charset="utf-8">
+  <meta charset="utf-8">
   <title>Webtools</title>
 
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
-  </script>
-  <![endif]-->
-
-	<link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 
- 	<script src="js/jquery-1.11.3.js"></script>
+  <script src="js/jquery-1.11.3.js"></script>
   <script src="js/jquery-ui.js"></script>
-  <script type="text/javascript" src="js/eventemitter2.min.js"></script>
-  <script type="text/javascript" src="js/roslib.min.js"></script>
-  <script type="text/javascript" src="js/ros.js"></script>
-  <script type="text/javascript" src="js/notify.js"></script>
-  <script type="text/javascript" src="js/angular.min.js"></script>
-  <script type="text/javascript" src="js/canvasjs.min.js"></script>
+
 
   <script>
-  	$(function() {
-    $( "#tabs" ).tabs();
-  	});
+  $(function() {
+    $( "#tabs" ).tabs({
+
+      beforeLoad: function( event, ui ) {
+        ui.jqXHR.fail(function() {
+          ui.panel.html(
+            "Couldn't load this tab. We'll try to fix this as soon as possible. " +
+            "If this wouldn't be a demo." );
+        });
+      }
+    });
+  });
   </script>
+
+
 
 </head>
 
@@ -42,7 +43,7 @@
       
       <ul>
         <li><a href="#tabs-1">Start</a></li>
-        <li><a href="#tabs-2">base_controller</a></li>
+        <li><a href="base_controller.html">base_controller</a></li>
         <li><a href="#tabs-3">base_odometry</a></li>
       </ul>
 
@@ -53,126 +54,7 @@
       </div>
 
       <!-- TAB 2: BASE_CONTROLLER -->  
-      <div id="tabs-2">
-      <!-- Anzeige Tables Leistungswerte --> 
-        <section id = "Section_Drivevalues">
-          
-          <div id = "Drivevalues">
-            
-            <div class = "Drive_Left">
-              <div style="display:inline-block">
-              <table id = "Table_Drive_Left" border="1px">
-                <tr>
-                  <th colspan = "2">Drive Left</th>
-                </tr>
-                <tr>
-                  <th ng-repeat="field in ['Speed Left','Current Left']">{{field}}</th>
-                </tr>
-                <tr>
-                  <td ng-repeat="field in ['speed_l','current_l']" ng-attr-id="{{'Motor_l-' + $index}}"></td>
-                </tr>
-              </table>
-              </div>
-            </div>
 
-            <div class = "Drive_Right">
-              <div style="display:inline-block">
-              <table id = "Table_Drive_Right" border="1px">
-                <tr>
-                  <th colspan = "2">Drive Right</th>
-                </tr>
-                <tr>
-                  <th ng-repeat="field in ['Speed Right','Current Right']">{{field}}</th>
-                </tr>
-                <tr>
-                  <td ng-repeat="field in ['speed_r','current_r']" ng-attr-id="{{'Motor_r-' + $index}}"></td>
-                </tr>
-              </table>
-              </div>
-            </div>  
-          </div>
-          <div style="clear: both;"></div>
-
-          <p></p>
-
-          <!-- Anzeige Charts Leistungswerte -->
-          <div id = "Drivevalues_Charts">  
-            <div class = "Drive_Left_Chart">
-              <input id="Enable_left_current_chart" name="enable_left_current_chart" type="checkbox" onclick="validate_left_current_chart()" checked/>
-              <div id="left_current" style="display:inline-block; border:1px solid black; width:450px; height:250px"></div>
-              <script type="text/javascript">
-                
-              </script>
-            </div>
-
-            <div class = "Drive_Right_Chart">
-              <input id="Enable_right_current_chart" name="enable_right_current_chart" type="checkbox" onclick="validate_right_current_chart()" checked/>
-              <div id="right_current" style="display:inline-block; border:1px solid black; width:450px; height:250px"></div>
-            </div>  
-          </div>
-          <div style="clear: both;"></div>  
-        </section>
-
-        <p></p>
-
-        <!-- Anzeige Tables Encoderdaten --> 
-        <section id = "Section_Encodervalues">
-        
-        <div id = "Encodervalues">
-          
-          <div class = "Encoder_Left">
-            <div style="display:inline-block">
-            <table id = "Table_Encoder_Left" border="1px">
-              <tr>
-                <th colspan = "5">Encodervalues Left</th>
-              </tr>
-              <tr>
-                <th>Encoder Left</th>
-                <th>Byte 0</th>
-                <th>Byte 1</th>
-                <th>Byte 2</th>
-                <th>Byte 3</th>
-              </tr>
-              <tr>
-                <td id="encoder_l"></td>
-                <td id="l_byte_1"></td>
-                <td id="l_byte_2"></td>
-                <td id="l_byte_3"></td>
-                <td id="l_byte_4"></td>
-              </tr>
-            </table>
-            </div>
-          </div>
-
-          <div class = "Encoder_Right">
-            <div style="display:inline-block">
-            <table id = "Table_Encoder_Right" border="1px">
-              <tr>
-                <th colspan = "5">Encodervalues Right</th>
-              </tr>
-              <tr>
-                <th>Encoder Right</th>
-                <th>Byte 0</th>
-                <th>Byte 1</th>
-                <th>Byte 2</th>
-                <th>Byte 3</th>
-              </tr>
-              <tr>
-                <td id="encoder_r"></td>
-                <td id="r_byte_1"></td>
-                <td id="r_byte_2"></td>
-                <td id="r_byte_3"></td>
-                <td id="r_byte_4"></td>
-              </tr>
-            </table>
-            </div>
-          </div>
-        
-        </div>
-        <div style="clear: both;"></div>
-        </section>
-        
-      </div>
 
       <!-- TAB 3: BASE_ODOMETRY -->
       <div id="tabs-3">

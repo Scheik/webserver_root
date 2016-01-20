@@ -16,8 +16,9 @@ function validate_right_current_chart(){
   }
 };
 
-window.onload = function()
-{
+//window.onload = function()
+//$(document).ready = function()
+//{
 
 // Current Right Chart
 // -------------------
@@ -127,19 +128,19 @@ ros.on('close', function() {
 var listener_md49data = new ROSLIB.Topic({
   ros : ros,
   name : '/md49_data',
-  messageType : 'custom_messages/md49_data'
+  messageType : 'md49_messages/md49_data'
 });
 $.notify("Subscribed topic: /md49_data", "info");
 
 
 listener_md49data.subscribe(function(message) {
   //console.log('Received message on ' + listener_md49data.name + ': ' +'speed_l:'+ message.current_l + ' speed_r:' + message.speed_r );
-  document.getElementById('Motor_l-0').innerHTML=message.speed_l;
-  document.getElementById('Motor_r-0').innerHTML=message.speed_r;
-  document.getElementById('Motor_l-1').innerHTML=message.current_l*10 + 'mA';
+  document.getElementById('speed_l').innerHTML=message.speed_l;
+  document.getElementById('speed_r').innerHTML=message.speed_r;
+  document.getElementById('current_l').innerHTML=message.current_l*10 + 'mA';
   yVal_left_current=message.current_l*10;
   updateChart_left_current();
-  document.getElementById('Motor_r-1').innerHTML=message.current_r*10 + 'mA';
+  document.getElementById('current_r').innerHTML=message.current_r*10 + 'mA';
   yVal_right_current=message.current_r*10;
   updateChart_right_current();
   //document.getElementById('id_current_left').innerHTML=message.volts + ' V';
@@ -151,7 +152,7 @@ listener_md49data.subscribe(function(message) {
 var listener_md49encoders = new ROSLIB.Topic({
   ros : ros,
   name : '/md49_encoders',
-  messageType : 'custom_messages/md49_encoders'
+  messageType : 'md49_messages/md49_encoders'
 });
 $.notify("Subscribed topic: /md49_encoders", "info");
 
@@ -170,5 +171,5 @@ listener_md49encoders.subscribe(function(encoder_message) {
   //listener_md49encoders.unsubscribe();
 });
 
-}
+//}
 
