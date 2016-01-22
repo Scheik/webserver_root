@@ -11,16 +11,20 @@
   <script src="js/jquery-1.11.3.js"></script>
   <script src="js/jquery-ui.js"></script>
 
+  <script type="text/javascript" src="js/notify.js" async></script>
+
+  <script type="text/javascript" src="js/eventemitter2.min.js" ></script>
+  <script type="text/javascript" src="js/roslib.min.js" ></script>
+  <script type="text/javascript" src="js/ros.js"></script>
+
 
   <script>
   $(function() {
     $( "#tabs" ).tabs({
-
       beforeLoad: function( event, ui ) {
         ui.jqXHR.fail(function() {
           ui.panel.html(
-            "Couldn't load this tab. We'll try to fix this as soon as possible. " +
-            "If this wouldn't be a demo." );
+            "Couldn't load this tab. We'll try to fix this as soon as possible.");
         });
       }
     });
@@ -42,25 +46,10 @@
     <div id="tabs">
       
       <ul>
-        <li><a href="#tabs-1">Start</a></li>
+        <li><a href="start.html">Start</a></li>
         <li><a href="base_controller.html">base_controller</a></li>
-        <li><a href="#tabs-3">base_odometry</a></li>
+        <li><a href="base_odometry.html">base_odometry</a></li>
       </ul>
-
-      <!-- TAB 1: START -->
-      <div id="tabs-1">
-        <h1>Welcome to the Webtools for my mobile robot</h1>
-        <p></p>
-      </div>
-
-      <!-- TAB 2: BASE_CONTROLLER -->  
-
-
-      <!-- TAB 3: BASE_ODOMETRY -->
-      <div id="tabs-3">
-        <h1>base_odometry</h1>
-        <p></p>
-      </div>
 
     </div>
   </div>
